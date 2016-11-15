@@ -68,6 +68,43 @@ public class ProblemSolving {
         return result;
     }
 
+    //zigzg conversion method
+    static StringBuilder zigzagConvert(String text, int rows) {
+        int hight = rows;
+        int width = 2 * (text.length() / rows) - 1;
+        int counter = 0;
+        char[][] zigzag = new char[hight][width];
+        StringBuilder finalResult = new StringBuilder("");
+        for (int j = 0; j < width; j++) {
+
+            for (int i = 0; i < hight; i++) {
+                if (counter < text.length()) {
+                    if (j % 2 == 0) {
+                        zigzag[i][j] = text.charAt(counter);
+                        counter++;
+                    } else {
+                        if (i % 2 == 0) {
+                            zigzag[i][j] = ' ';
+                        } else {
+                            zigzag[i][j] = text.charAt(counter);
+                            counter++;
+                        }
+                    }
+                } else {
+                    zigzag[i][j] = ' ';
+                }
+            }
+        }
+        for (char[] a : zigzag) {
+            for (char b : a) {
+                if (b != ' ') {
+                    finalResult.append(b);
+                }
+            }
+        }
+        return finalResult;
+    }
+
     public static void main(String[] args) {
         //testing removing repeated characters method
         System.out.println(stringWithoutRepetitiveCharacters("hhhheeeeendeded"));
@@ -77,9 +114,12 @@ public class ProblemSolving {
 
         //testing reverting integer method
         System.out.println(revertInteger(1234788));
-        
+
         //test reversing words method
         System.out.println(reverseSentence("hi hend layla"));
+
+        //test zigzag
+        System.out.println(zigzagConvert("paypalishiring", 3));
     }
 
 }
